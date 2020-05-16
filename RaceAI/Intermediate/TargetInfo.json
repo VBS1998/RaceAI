@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "RaceAI",
+			"Path": "D:\\Unreal Projects\\RaceAI\\RaceAI\\Source\\RaceAI.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "RaceAIEditor",
+			"Path": "D:\\Unreal Projects\\RaceAI\\RaceAI\\Source\\RaceAIEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

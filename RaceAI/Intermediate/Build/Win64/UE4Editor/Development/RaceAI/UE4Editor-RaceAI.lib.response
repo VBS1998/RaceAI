@@ -1,0 +1,24 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-RaceAI.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\RaceAIEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAI.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIGameMode.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIHud.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIPawn.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIWheelFront.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIWheelRear.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAI.init.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIGameMode.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIHud.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIPawn.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIWheelFront.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\RaceAIWheelRear.gen.cpp.obj"
+"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\Default.rc2.res"
+/OUT:"D:\Unreal Projects\RaceAI\RaceAI\Intermediate\Build\Win64\UE4Editor\Development\RaceAI\UE4Editor-RaceAI.lib"
+/INCLUDE:IMPLEMENT_MODULE_RaceAI

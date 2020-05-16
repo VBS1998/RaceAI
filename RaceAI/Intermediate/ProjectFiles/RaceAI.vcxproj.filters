@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\RaceAI.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{B6423BD2-C0CD-4435-A2C9-8FFBC2F862A1}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\RaceAI.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\RaceAIEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{EA8880D9-67F8-4318-878D-E0D915E095B4}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\RaceAI">
+      <UniqueIdentifier>{3DDA783F-6D52-46DD-873E-3E6E2C098A2F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\RaceAI\RaceAI.Build.cs">
+      <Filter>Source\RaceAI</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAI.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAI.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAIGameMode.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAIGameMode.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAIHud.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAIHud.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAIPawn.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAIPawn.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAIWheelFront.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAIWheelFront.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RaceAI\RaceAIWheelRear.cpp">
+      <Filter>Source\RaceAI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RaceAI\RaceAIWheelRear.h">
+      <Filter>Source\RaceAI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
