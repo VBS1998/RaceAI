@@ -1141,3 +1141,4 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2020.05.16-17.57.11:471][135]LogAISub: UAISubsystem::~UAISubsystem EnvQueryManager (0000026C1A2C5800), frame # 32135
 [2020.05.16-17.57.11:473][135]LogUObjectHash: Compacting FUObjectHashTables data took   0.77ms
 [2020.05.16-17.57.11:523][137]LogPlayLevel: Display: Destroying online subsystem :Context_5
+[2020.05.16-18.05.30:212][967]LogSlate: Took 0.000269 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
