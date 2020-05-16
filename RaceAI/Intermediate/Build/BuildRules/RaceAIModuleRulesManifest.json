@@ -1,8 +1,0 @@
-{
-	"SourceFiles": [
-		"D:\\Unreal Projects\\RaceAI\\RaceAI\\Source\\RaceAI\\RaceAI.Build.cs",
-		"D:\\Unreal Projects\\RaceAI\\RaceAI\\Source\\RaceAI.Target.cs",
-		"D:\\Unreal Projects\\RaceAI\\RaceAI\\Source\\RaceAIEditor.Target.cs"
-	],
-	"EngineVersion": "4.25.0"
-}
