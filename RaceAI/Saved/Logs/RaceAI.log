@@ -2648,3 +2648,5 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2020.05.16-19.27.02:123][726]LogSavePackage: Moving '../../../../Unreal Projects/RaceAI/RaceAI/Saved/VehicleAdvExampleMap_Auto33DCA1D784B072690382A709DE4F06F4E.tmp' to '../../../../Unreal Projects/RaceAI/RaceAI/Saved/Autosaves/Game/VehicleAdvCPP/Maps/VehicleAdvExampleMap_Auto3.umap'
 [2020.05.16-19.27.02:129][726]LogFileHelpers: Editor autosave (incl. sublevels) for '/Game/VehicleAdvCPP/Maps/VehicleAdvExampleMap' took 0.316
 [2020.05.16-19.27.02:129][726]LogFileHelpers: Editor autosave (incl. sublevels) for all levels took 0.316
+[2020.05.16-19.37.02:565][609]LogUObjectHash: Compacting FUObjectHashTables data took   0.67ms
+[2020.05.16-19.37.02:572][609]LogFileHelpers: Editor autosave (incl. sublevels) for '/Game/VehicleAdvCPP/Maps/VehicleAdvExampleMap' took 0.019
