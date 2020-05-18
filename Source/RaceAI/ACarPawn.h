@@ -10,8 +10,11 @@
  * 
  */
 UCLASS()
-class RACEAI_API AACarPawn : public ARaceAIPawn
+class RACEAI_API ACarPawn : public ARaceAIPawn
 {
 	GENERATED_BODY()
+
+public:
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 };

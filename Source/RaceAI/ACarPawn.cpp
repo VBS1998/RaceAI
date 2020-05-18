@@ -3,7 +3,8 @@
 
 #include "ACarPawn.h"
 
+
 void ACarPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
+	//Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
