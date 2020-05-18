@@ -5,6 +5,11 @@
 
 void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
+	if (controllerAI == NULL || !(controllerAI->isAIControlled())) {
+		Super::SetupPlayerInputComponent(PlayerInputComponent);
+	}
+	else {
+		Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
+	}
 
 }
