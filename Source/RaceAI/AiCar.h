@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "RaceAIPawn.h"
-#include "ACarPawn.generated.h"
+#include "AiCar.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RACEAI_API ACarPawn : public ARaceAIPawn
+class RACEAI_API AAiCar : public ARaceAIPawn
 {
 	GENERATED_BODY()
-
+	
 public:
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
 };
