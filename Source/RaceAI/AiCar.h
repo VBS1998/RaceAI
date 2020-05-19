@@ -16,9 +16,12 @@ class RACEAI_API AAiCar : public ARaceAIPawn
 	GENERATED_BODY()
 private:
 
-	UPROPERTY()
+	UPROPERTY(meta = (AllowPrivateAccess = "true"))
+	bool isAIControlled;
+
 	UAiCarAIController *controllerAI;
 
 public:
+	virtual void BeginPlay() override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };

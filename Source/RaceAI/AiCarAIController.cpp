@@ -3,6 +3,15 @@
 
 #include "AiCarAIController.h"
 
+void UAiCarAIController::BeginPlay()
+{
+	this->move_forward = false;
+	this->move_back = false;
+	this->move_right = false;
+	this->move_left = false;
+	this->handbreak = false;
+}
+
 void UAiCarAIController::updateOutputsWith(int speed, int* sensors, int gear)
 {
 }
@@ -34,14 +43,7 @@ bool UAiCarAIController::shouldBreak()
 
 bool UAiCarAIController::isAIControlled()
 {
-	return (neuralNetwork == NULL);
+	return (neuralNetwork == nullptr);
 }
 
-void UAiCarAIController::BeginPlay()
-{
-	this->move_forward = false;
-	this->move_back = false;
-	this->move_right = false;
-	this->move_left = false;
-	this->handbreak = false;
-}
+

@@ -22,6 +22,7 @@ private:
 	UNeuralNetwork *neuralNetwork;
 
 public:
+	void BeginPlay();
 
 	//This method will give the Neural Network the inputs and handle the outputs
 	void updateOutputsWith(int speed, int *sensors, int gear);
@@ -35,8 +36,5 @@ public:
 
 	//A method that informs the existence of a Neural Network
 	bool isAIControlled();
-
-	
-	virtual void BeginPlay();
-	
+		
 };
