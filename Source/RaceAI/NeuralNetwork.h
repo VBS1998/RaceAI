@@ -9,10 +9,10 @@
 
 typedef struct{
 
-	float* input_weights;
+	int* input_weights;
 	int* inputs;
 	int input_num;
-	float bias;
+	int bias;
 }Neuronium;
 
 /**
@@ -30,8 +30,10 @@ private:
 	int output_num;
 
 	int neuroniumOutput(Neuronium* neuronium);
-	
+
 public:
 
 	int* networkOutput(int* inputs, int input_num);
+
+	static UNeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
 };
