@@ -30,10 +30,12 @@ int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 	int* outputs = new int[this->output_num];
 	for (int i = 0; i < output_num; i++) {
 		Neuronium* neuronium = &outputNeuroniumLayer[i];
-		neuronium->inputs = inputs;
+		neuronium->inputs = innerOutputs;
 		neuronium->input_num = inner_num;
 		outputs[i] = this->neuroniumOutput(neuronium) > 0 ? 1 : 0;
 	}
+
+	delete(innerOutputs);
 
 	return outputs;
 }

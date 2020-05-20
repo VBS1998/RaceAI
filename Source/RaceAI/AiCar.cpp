@@ -15,7 +15,11 @@ void AAiCar::BeginPlay()
 
 void AAiCar::Tick(float Delta)
 {
-	controllerAI->updateOutputsWith(10, 2, nullptr, 0);
+	Super::Tick(Delta);
+
+	int gear = GetVehicleMovement()->GetCurrentGear();
+	int speed = GetVehicleMovement()->GetForwardSpeed();
+	controllerAI->updateOutputsWith(speed, gear, nullptr, 0);
 	if (controllerAI->shouldMoveForward()) this->MoveForward(1);
 	if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
 	if (controllerAI->shouldMoveRight()) this->MoveRight(1);

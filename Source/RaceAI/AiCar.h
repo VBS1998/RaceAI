@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "RaceAIPawn.h"
 #include "AiCarAIController.h" 
+
+#include "WheeledVehicleMovementComponent4W.h"
+
 #include "AiCar.generated.h"
 
 /**

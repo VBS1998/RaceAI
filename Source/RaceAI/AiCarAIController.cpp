@@ -31,6 +31,9 @@ void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, in
 	this->move_left = outputs[3] == 1 ? true : false;
 	this->handbreak = outputs[4] == 1 ? true : false;
 
+	delete(outputs);
+	delete(inputs);
+
 }
 
 bool UAiCarAIController::shouldMoveForward()
