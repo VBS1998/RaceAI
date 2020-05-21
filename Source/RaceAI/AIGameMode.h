@@ -30,11 +30,14 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int AiPawnsCount;
 
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bForceGameRestart = false;
 
 private:
+	bool CheckIfAllCarsAreDead();
 	void SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot);
 protected:
+	void Tick(float DeltaSeconds) override;
 	void RestartPlayer(AController* NewPlayer) override;
 public:
 	void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;

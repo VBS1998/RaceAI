@@ -36,4 +36,15 @@ void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompone
 	}
 }
 
+//arthur//
+void AAiCar::OnWallCollision()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Collidiu!"));
+	//implementa ai papito
+}
 
+bool AAiCar::IsCarDead()
+{
+	return false; //implementa ai papiro
+}
+//arhtur//

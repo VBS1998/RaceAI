@@ -13,13 +13,31 @@ void AAIGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
 }
+void AAIGameMode::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	if (CheckIfAllCarsAreDead()) RestartGame();
+}
+bool AAIGameMode::CheckIfAllCarsAreDead()
+{
+	bool allCarsAreDead = true;
+
+	if (bForceGameRestart) return true;
+
+	for (int i = 0; i < IntantiatedCars.Num(); i++)
+	{
+		if (!IntantiatedCars[i]->IsCarDead()) allCarsAreDead = false;
+	}
+
+	return allCarsAreDead;
+}
 void AAIGameMode::RestartPlayer(AController* NewPlayer)
 {
 	if (NewPlayer == nullptr || NewPlayer->IsPendingKillPending())
 	{
 		return;
 	}
-
+	
 	AActor* StartSpot = FindPlayerStart(NewPlayer);
 
 	// If a start spot wasn't found,
@@ -32,7 +50,7 @@ void AAIGameMode::RestartPlayer(AController* NewPlayer)
 			UE_LOG(LogGameMode, Warning, TEXT("RestartPlayer: Player start not found, using last start spot"));
 		}
 	}
-
+	
 	RestartPlayerAtPlayerStart(NewPlayer, StartSpot);
 
 	IntantiatedCars.Add((AAiCar*)NewPlayer->GetPawn());

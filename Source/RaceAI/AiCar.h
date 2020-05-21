@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "RaceAIPawn.h"
 #include "AiCarAIController.h" 
+#include "Containers/UnrealString.h"
 
 #include "WheeledVehicleMovementComponent4W.h"
 
@@ -23,8 +24,18 @@ private:
 	bool isAIControlled = true;
 
 	UAiCarAIController *controllerAI;
-
+protected:
+	//arthur//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay)
+	FName WallTag;
+	//arthur//
 public:
+	//arthur//
+	UFUNCTION(BlueprintCallable)
+	void OnWallCollision();
+	bool IsCarDead();
+	//arthur//
+
 	virtual void BeginPlay() override;
 	virtual void Tick(float Delta) override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
