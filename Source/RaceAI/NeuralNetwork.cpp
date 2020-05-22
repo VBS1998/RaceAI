@@ -3,7 +3,7 @@
 
 #include "NeuralNetwork.h"
 
-int UNeuralNetwork::neuroniumOutput(Neuronium* neuronium) {
+int UNeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	if (neuronium != NULL && neuronium->inputs != NULL && neuronium->input_weights != NULL) {
 		float result = 0;
 		for (int i = 0; i < neuronium->input_num; i++) {
@@ -21,7 +21,7 @@ int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 
 	int* innerOutputs = new int[this->inner_num];
 	for (int i = 0; i < inner_num; i++) {
-		Neuronium neuronium = innerNeuroniumLayer[i];
+		FNeuronium neuronium = innerNeuroniumLayer[i];
 		neuronium.inputs = inputs;
 		neuronium.input_num = input_num;
 		innerOutputs[i] = this->neuroniumOutput(&neuronium);
@@ -29,7 +29,7 @@ int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 
 	int* outputs = new int[this->output_num];
 	for (int i = 0; i < output_num; i++) {
-		Neuronium neuronium = outputNeuroniumLayer[i];
+		FNeuronium neuronium = outputNeuroniumLayer[i];
 		neuronium.inputs = innerOutputs;
 		neuronium.input_num = inner_num;
 		outputs[i] = this->neuroniumOutput(&neuronium) > 0 ? 1 : 0;
@@ -44,7 +44,7 @@ UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_
 {
 	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
 
-	Neuronium* innerLayer = new Neuronium[input_num];
+	FNeuronium* innerLayer = new FNeuronium[input_num];
 	for (int i = 0; i < input_num; i++) {
 		innerLayer[i].input_weights = new int[input_num];
 		innerLayer[i].input_num = input_num;
@@ -56,7 +56,7 @@ UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_
 	network->innerNeuroniumLayer = innerLayer;
 	network->inner_num = input_num;
 
-	Neuronium* outputLayer = new Neuronium[output_num];
+	FNeuronium* outputLayer = new FNeuronium[output_num];
 	for (int i = 0; i < output_num; i++) {
 		outputLayer[i].input_weights = new int[input_num];
 		outputLayer[i].input_num = input_num;

@@ -6,14 +6,15 @@
 #include "UObject/NoExportTypes.h"
 #include "NeuralNetwork.generated.h"
 
-
-typedef struct{
+USTRUCT()
+struct FNeuronium {
+	GENERATED_USTRUCT_BODY()
 
 	int* input_weights;
 	int* inputs;
 	int input_num;
 	int bias;
-}Neuronium;
+};
 
 /**
  * 
@@ -24,12 +25,12 @@ class RACEAI_API UNeuralNetwork : public UObject
 	GENERATED_BODY()
 
 private:
-	Neuronium* innerNeuroniumLayer;
-	Neuronium* outputNeuroniumLayer;
+	FNeuronium* innerNeuroniumLayer;
+	FNeuronium* outputNeuroniumLayer;
 	int inner_num;
 	int output_num;
 
-	int neuroniumOutput(Neuronium* neuronium);
+	int neuroniumOutput(FNeuronium* neuronium);
 
 public:
 
