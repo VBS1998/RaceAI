@@ -19,7 +19,8 @@ void AAiCar::Tick(float Delta)
 
 	int gear = GetVehicleMovement()->GetCurrentGear();
 	int speed = GetVehicleMovement()->GetForwardSpeed();
-	controllerAI->updateOutputsWith(speed, gear, nullptr, 0);
+	TArray<int> sensors;
+	controllerAI->updateOutputsWith(speed, gear, sensors, 0);
 	if (controllerAI->shouldMoveForward()) this->MoveForward(1);
 	if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
 	if (controllerAI->shouldMoveRight()) this->MoveRight(1);

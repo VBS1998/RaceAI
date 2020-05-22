@@ -10,8 +10,8 @@ USTRUCT()
 struct FNeuronium {
 	GENERATED_USTRUCT_BODY()
 
-	int* input_weights;
-	int* inputs;
+	TArray<int> input_weights;
+	TArray<int> inputs;
 	int input_num;
 	int bias;
 };
@@ -25,16 +25,16 @@ class RACEAI_API UNeuralNetwork : public UObject
 	GENERATED_BODY()
 
 private:
-	FNeuronium* innerNeuroniumLayer;
-	FNeuronium* outputNeuroniumLayer;
+	TArray<FNeuronium> innerNeuroniumLayer;
+	TArray<FNeuronium> outputNeuroniumLayer;
 	int inner_num;
 	int output_num;
 
-	int neuroniumOutput(FNeuronium* neuronium);
+	int neuroniumOutput(FNeuronium neuronium);
 
 public:
 
-	int* networkOutput(int* inputs, int input_num);
+	TArray<int> networkOutput(TArray<int> inputs, int input_num);
 
 	static UNeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
 };

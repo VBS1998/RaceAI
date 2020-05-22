@@ -14,26 +14,22 @@ void UAiCarAIController::BeginPlay()
 	this->neuralNetwork = UNeuralNetwork::generateNeuralNetwork(2, 5);
 }
 
-void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, int sensors_num)
+void UAiCarAIController::updateOutputsWith(int speed, int gear, TArray<int> sensors, int sensors_num)
 {
-	int* inputs = new int[sensors_num+2];
-	inputs[0] = speed;
-	inputs[1] = gear;
+	TArray<int> inputs;
+	inputs.Add(speed);
+	inputs.Add(gear);
 	for (int i = 0; i < sensors_num; i++) {
-		inputs[i+2] = sensors[i];
+		inputs.Add(sensors[i]);
 	}
 
-	int* outputs = this->neuralNetwork->networkOutput(inputs, sensors_num + 2);
+	TArray<int> outputs = this->neuralNetwork->networkOutput(inputs, sensors_num + 2);
 
 	this->move_forward = outputs[0] == 1 ? true : false;
 	this->move_back = outputs[1] == 1 ? true : false;
 	this->move_right = outputs[2] == 1 ? true : false;
 	this->move_left = outputs[3] == 1 ? true : false;
 	this->handbreak = outputs[4] == 1 ? true : false;
-
-	delete(outputs);
-	delete(inputs);
-
 }
 
 bool UAiCarAIController::shouldMoveForward()

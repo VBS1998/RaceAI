@@ -25,7 +25,7 @@ public:
 	void BeginPlay();
 
 	//This method will give the Neural Network the inputs and handle the outputs
-	void updateOutputsWith(int speed, int gear, int* sensors, int sensors_num);
+	void updateOutputsWith(int speed, int gear, TArray<int> sensors, int sensors_num);
 
 	//These methodes will tell the AiCar which "buttons" it should press 
 	bool shouldMoveForward();
