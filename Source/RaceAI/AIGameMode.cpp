@@ -58,7 +58,7 @@ void AAIGameMode::RestartPlayer(AController* NewPlayer)
 }
 void AAIGameMode::SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot)
 {
-	UE_LOG(LogTemp, Log, TEXT("SpawnActor failed because the spawned actor %s IsPendingKill"));
+
 
 	FActorSpawnParameters SpawnInfo;
 	FRotator StartRotation(ForceInit);
@@ -70,7 +70,7 @@ void AAIGameMode::SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot)
 	SpawnInfo.Instigator = GetInstigator();
 	SpawnInfo.ObjectFlags |= RF_Transient;	
 
-	for (int i = 0; i < AiPawnsCount; i++)
+	for (int i = 1; i < AiPawnsCount; i++)
 	{
 		AAiCar* InstantiatedAiCar = world->SpawnActor<AAiCar>(AiCar->GetClass(), Transform, SpawnInfo);
 		if (!InstantiatedAiCar)

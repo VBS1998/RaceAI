@@ -3,7 +3,7 @@
 
 #include "NeuralNetwork.h"
 
-int NeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
+int UNeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	if (neuronium != NULL && neuronium->inputs != NULL && neuronium->input_weights != NULL) {
 		float result = 0;
 		for (int i = 0; i < neuronium->input_num; i++) {
@@ -15,17 +15,9 @@ int NeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	return 0;
 }
 
-NeuralNetwork::NeuralNetwork()
+int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 {
-}
-
-NeuralNetwork::~NeuralNetwork()
-{
-}
-
-int* NeuralNetwork::networkOutput(int* inputs, int input_num)
-{
-	if (innerNeuroniumLayer == nullptr || outputNeuroniumLayer == nullptr) return nullptr;
+	//if (innerNeuroniumLayer.Num() == 0 || outputNeuroniumLayer == nullptr) return nullptr;
 
 	int* innerOutputs = new int[this->inner_num];
 	for (int i = 0; i < inner_num; i++) {
@@ -48,32 +40,38 @@ int* NeuralNetwork::networkOutput(int* inputs, int input_num)
 	return outputs;
 }
 
-NeuralNetwork* NeuralNetwork::generateNeuralNetwork(int input_num, int output_num)
+UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_num)
 {
-	NeuralNetwork* network = new NeuralNetwork();
+	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
 
-	FNeuronium* innerLayer = new FNeuronium[input_num];
+	
 	for (int i = 0; i < input_num; i++) {
-		innerLayer[i].input_weights = new int[input_num];
-		innerLayer[i].input_num = input_num;
+		FNeuronium newNeuronium;
+		newNeuronium.input_weights = new int[input_num];
+		newNeuronium.input_num = input_num;
 		for (int j = 0; j < input_num; j++) {
-			innerLayer[i].input_weights[j] = FMath::Rand()%2001 - 1000;
+			newNeuronium.input_weights[j] = FMath::Rand()%2001 - 1000;
 		}
-		innerLayer[i].bias = FMath::Rand()%2001 - 1000;
+		newNeuronium.bias = FMath::Rand()%2001 - 1000;
+
+		network->innerNeuroniumLayer.Add(newNeuronium);
 	}
-	network->innerNeuroniumLayer = innerLayer;
+
 	network->inner_num = input_num;
 
 	FNeuronium* outputLayer = new FNeuronium[output_num];
 	for (int i = 0; i < output_num; i++) {
-		outputLayer[i].input_weights = new int[input_num];
-		outputLayer[i].input_num = input_num;
+		FNeuronium newNeuronium;
+		newNeuronium.input_weights = new int[input_num];
+		newNeuronium.input_num = input_num;
 		for (int j = 0; j < input_num; j++) {
-			outputLayer[i].input_weights[j] = FMath::Rand() % 2001 - 1000;
+			newNeuronium.input_weights[j] = FMath::Rand() % 2001 - 1000;
 		}
-		outputLayer[i].bias = FMath::Rand() % 2001 - 1000;
+		newNeuronium.bias = FMath::Rand() % 2001 - 1000;
+
+		network->outputNeuroniumLayer.Add(newNeuronium);
 	}
-	network->outputNeuroniumLayer = outputLayer;
+
 	network->output_num = output_num;
 
 	return network;

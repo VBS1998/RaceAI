@@ -8,6 +8,7 @@
 #include "Containers/UnrealString.h"
 
 #include "WheeledVehicleMovementComponent4W.h"
+#include "DrawDebugHelpers.h"
 
 #include "AiCar.generated.h"
 
@@ -20,10 +21,16 @@ class RACEAI_API AAiCar : public ARaceAIPawn
 	GENERATED_BODY()
 private:
 
-	//UPROPERTY(meta = (AllowPrivateAccess = "true"))
+	UPROPERTY()
+	UAiCarAIController* controllerAI;
+	
 	bool isAIControlled = true;
 
-	UAiCarAIController *controllerAI;
+	//arthur//
+	float LastLogDuration = 0;
+
+	void SensorRayCasts();
+	//arthur//
 protected:
 	//arthur//
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay)
