@@ -16,13 +16,8 @@ struct FNeuronium {
 	int bias;
 };
 
-/**
- * 
- */
-UCLASS()
-class RACEAI_API UNeuralNetwork : public UObject
+class NeuralNetwork
 {
-	GENERATED_BODY()
 
 private:
 	FNeuronium* innerNeuroniumLayer;
@@ -33,8 +28,9 @@ private:
 	int neuroniumOutput(FNeuronium* neuronium);
 
 public:
-
+	NeuralNetwork();
+	~NeuralNetwork();
 	int* networkOutput(int* inputs, int input_num);
 
-	static UNeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
+	static NeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
 };

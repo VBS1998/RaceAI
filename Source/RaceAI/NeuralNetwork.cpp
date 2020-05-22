@@ -3,7 +3,7 @@
 
 #include "NeuralNetwork.h"
 
-int UNeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
+int NeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	if (neuronium != NULL && neuronium->inputs != NULL && neuronium->input_weights != NULL) {
 		float result = 0;
 		for (int i = 0; i < neuronium->input_num; i++) {
@@ -15,7 +15,15 @@ int UNeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	return 0;
 }
 
-int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
+NeuralNetwork::NeuralNetwork()
+{
+}
+
+NeuralNetwork::~NeuralNetwork()
+{
+}
+
+int* NeuralNetwork::networkOutput(int* inputs, int input_num)
 {
 	if (innerNeuroniumLayer == nullptr || outputNeuroniumLayer == nullptr) return nullptr;
 
@@ -40,9 +48,9 @@ int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 	return outputs;
 }
 
-UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_num)
+NeuralNetwork* NeuralNetwork::generateNeuralNetwork(int input_num, int output_num)
 {
-	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
+	NeuralNetwork* network = new NeuralNetwork();
 
 	FNeuronium* innerLayer = new FNeuronium[input_num];
 	for (int i = 0; i < input_num; i++) {
