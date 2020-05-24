@@ -37,5 +37,11 @@ public:
 
 	//A method that informs the existence of a Neural Network
 	bool isAIControlled();
-		
+
+	UNeuralNetwork* getNetwork();
+	void setNetwork(UNeuralNetwork* network);
+	void deleteNetwork();
+
+	static int fitness(FVector2D carPosition, FVector2D goalPosition);
+
 };

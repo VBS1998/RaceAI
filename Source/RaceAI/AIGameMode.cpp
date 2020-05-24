@@ -13,23 +13,25 @@ void AAIGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
 }
+
 void AAIGameMode::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	if (CheckIfAllCarsAreDead()) RestartGame();
+
+	generationTime += DeltaSeconds;
+
+	if (CheckIfAllCarsAreDead() || generationTime > maxGenerationTime) nextGeneration();
 }
 bool AAIGameMode::CheckIfAllCarsAreDead()
 {
-	bool allCarsAreDead = true;
-
 	if (bForceGameRestart) return true;
 
 	for (int i = 0; i < IntantiatedCars.Num(); i++)
 	{
-		if (!IntantiatedCars[i]->IsCarDead()) allCarsAreDead = false;
+		if (!IntantiatedCars[i]->IsCarDead()) return false;
 	}
 
-	return allCarsAreDead;
+	return true;
 }
 void AAIGameMode::RestartPlayer(AController* NewPlayer)
 {
@@ -87,5 +89,35 @@ void AAIGameMode::SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot)
 		InstantiatedAiCar->SpawnDefaultController();
 		InstantiatedAiCar->GetController()->SetFolderPath((FName)folderName);
 		IntantiatedCars.Add(InstantiatedAiCar);
+	}
+}
+
+void AAIGameMode::nextGeneration()
+{
+	int maxFitness = 0;
+	UNeuralNetwork* bestNetwork = nullptr;
+	int bestCar_num = 0;
+	for (int i = 0; i < IntantiatedCars.Num(); i++)
+	{
+		FVector carPosition = IntantiatedCars[i]->GetActorLocation();
+		FVector2D carPosition2D = FVector2D(carPosition.X, carPosition.Y);
+		int thisFitness = UAiCarAIController::fitness(carPosition2D, FVector2D(0, 0));
+		if (thisFitness > maxFitness) {
+			bestNetwork = IntantiatedCars[i]->getAIController()->getNetwork();
+			maxFitness = thisFitness;
+			bestCar_num = i;
+		}
+	}
+
+	for (int i = 0; i < IntantiatedCars.Num(); i++) {
+		if (i != bestCar_num) {
+			UAiCarAIController* controller = IntantiatedCars[i]->getAIController();
+			controller->deleteNetwork();
+			controller->setNetwork(bestNetwork->mutateNetwork());
+		}
+	}
+
+	for (int i = 0; i < IntantiatedCars.Num(); i++) {
+		IntantiatedCars[i]->Reset();
 	}
 }

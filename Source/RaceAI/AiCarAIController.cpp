@@ -67,4 +67,24 @@ bool UAiCarAIController::isAIControlled()
 	return (neuralNetwork == nullptr);
 }
 
+UNeuralNetwork* UAiCarAIController::getNetwork()
+{
+	return this->neuralNetwork;;
+}
+
+void UAiCarAIController::setNetwork(UNeuralNetwork* network)
+{
+	this->neuralNetwork = network;
+}
+
+void UAiCarAIController::deleteNetwork()
+{
+	neuralNetwork->ConditionalBeginDestroy();
+}
+
+int UAiCarAIController::fitness(FVector2D carPosition, FVector2D goalPosition)
+{
+	return FVector2D::Distance(carPosition, goalPosition);
+}
+
 

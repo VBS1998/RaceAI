@@ -76,3 +76,18 @@ UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_
 
 	return network;
 }
+
+UNeuralNetwork* UNeuralNetwork::mutateNetwork()
+{
+	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
+
+	for (int i = 0; i < this->inner_num; i++) {
+		network->innerNeuroniumLayer.Add(this->innerNeuroniumLayer[i]);
+	}
+
+	for (int i = 0; i < this->output_num; i++) {
+		network->outputNeuroniumLayer.Add(this->outputNeuroniumLayer[i]);
+	}
+
+	return network;
+}
