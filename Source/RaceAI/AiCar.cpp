@@ -39,11 +39,8 @@ void AAiCar::Tick(float Delta)
 	if (controllerAI->shouldBreak()) this->OnHandbrakePressed();
 	else this->OnHandbrakeReleased();
 
-	//arthur//
 	LastLogDuration += Delta;
-
 	SensorRayCasts();
-	//arthur//
 }
 
 void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)

@@ -30,7 +30,7 @@ private:
 	int neuroniumOutput(FNeuronium* neuronium);
 
 public:
-	int* networkOutput(int* inputs, int input_num);
+	TArray<int> networkOutput(int* inputs, int input_num);
 
 	static UNeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
 	UNeuralNetwork* mutateNetwork();

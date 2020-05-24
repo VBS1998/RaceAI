@@ -34,7 +34,7 @@ protected:
 	bool bForceGameRestart = false;
 
 	float generationTime = 0;
-	const float maxGenerationTime = 30; //In seconds
+	const float maxGenerationTime = 10; //In seconds
 
 private:
 	bool CheckIfAllCarsAreDead();

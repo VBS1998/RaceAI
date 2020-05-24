@@ -15,7 +15,7 @@ int UNeuralNetwork::neuroniumOutput(FNeuronium* neuronium) {
 	return 0;
 }
 
-int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
+TArray<int> UNeuralNetwork::networkOutput(int* inputs, int input_num)
 {
 	//if (innerNeuroniumLayer.Num() == 0 || outputNeuroniumLayer == nullptr) return nullptr;
 
@@ -27,12 +27,12 @@ int* UNeuralNetwork::networkOutput(int* inputs, int input_num)
 		innerOutputs[i] = this->neuroniumOutput(&neuronium);
 	}
 
-	int* outputs = new int[this->output_num];
+	TArray<int> outputs;
 	for (int i = 0; i < output_num; i++) {
 		FNeuronium neuronium = outputNeuroniumLayer[i];
 		neuronium.inputs = innerOutputs;
 		neuronium.input_num = inner_num;
-		outputs[i] = this->neuroniumOutput(&neuronium) > 0 ? 1 : 0;
+		outputs.Add(this->neuroniumOutput(&neuronium) > 0 ? 1 : 0);
 	}
 
 	delete(innerOutputs);
@@ -84,10 +84,11 @@ UNeuralNetwork* UNeuralNetwork::mutateNetwork()
 	for (int i = 0; i < this->inner_num; i++) {
 		network->innerNeuroniumLayer.Add(this->innerNeuroniumLayer[i]);
 	}
-
+	network->inner_num = inner_num;
 	for (int i = 0; i < this->output_num; i++) {
 		network->outputNeuroniumLayer.Add(this->outputNeuroniumLayer[i]);
 	}
+	network->output_num = output_num;
 
 	return network;
 }
