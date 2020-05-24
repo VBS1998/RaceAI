@@ -120,7 +120,7 @@ void AAIGameMode::nextGeneration()
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Chamou reset"));
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
-		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::ResetPhysics);
+		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::TeleportPhysics);
 	}
 	generationTime = 0;
 }
