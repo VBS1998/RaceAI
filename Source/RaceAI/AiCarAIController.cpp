@@ -23,7 +23,7 @@ void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, in
 		inputs[i+2] = sensors[i];
 	}
 
-	int* outputs = this->neuralNetwork->networkOutput(inputs, sensors_num + 2);
+	TArray<int> outputs = this->neuralNetwork->networkOutput(inputs, sensors_num + 2);
 
 	this->move_forward = outputs[0] == 1 ? true : false;
 	this->move_back = outputs[1] == 1 ? true : false;
@@ -31,7 +31,6 @@ void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, in
 	this->move_left = outputs[3] == 1 ? true : false;
 	this->handbreak = outputs[4] == 1 ? true : false;
 
-	delete(outputs);
 	delete(inputs);
 
 
@@ -65,6 +64,26 @@ bool UAiCarAIController::shouldBreak()
 bool UAiCarAIController::isAIControlled()
 {
 	return (neuralNetwork == nullptr);
+}
+
+UNeuralNetwork* UAiCarAIController::getNetwork()
+{
+	return this->neuralNetwork;;
+}
+
+void UAiCarAIController::setNetwork(UNeuralNetwork* network)
+{
+	this->neuralNetwork = network;
+}
+
+void UAiCarAIController::deleteNetwork()
+{
+	neuralNetwork->ConditionalBeginDestroy();
+}
+
+int UAiCarAIController::fitness(FVector2D carPosition, FVector2D goalPosition)
+{
+	return FVector2D::Distance(carPosition, goalPosition);
 }
 
 

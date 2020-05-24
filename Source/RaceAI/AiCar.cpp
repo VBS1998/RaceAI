@@ -17,19 +17,29 @@ void AAiCar::Tick(float Delta)
 {
 	Super::Tick(Delta);
 
-	if (!this->isAIControlled) return;
+	if (!this->isAIControlled || this->isDead) {
+		this->MoveForward(0);
+		this->MoveRight(0);
+		this->OnHandbrakePressed();
+		return;
+	}
 
 	int gear = GetVehicleMovement()->GetCurrentGear();
 	int speed = GetVehicleMovement()->GetForwardSpeed();
 	controllerAI->updateOutputsWith(speed, gear, nullptr, 0);
+
 	if (controllerAI->shouldMoveForward()) this->MoveForward(1);
 	if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
+	if (!controllerAI->shouldMoveForward() && !controllerAI->shouldMoveBack()) this->MoveForward(0);
+
 	if (controllerAI->shouldMoveRight()) this->MoveRight(1);
 	if (controllerAI->shouldMoveLeft()) this->MoveRight(-1);
+	if (!controllerAI->shouldMoveRight() && !controllerAI->shouldMoveLeft()) this->MoveRight(0);
 
-	//arthur//
+	if (controllerAI->shouldBreak()) this->OnHandbrakePressed();
+	else this->OnHandbrakeReleased();
+
 	if (bLogActive) LastLogDuration += Delta;
-	//arthur//
 }
 
 void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -42,16 +52,21 @@ void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompone
 	}
 }
 
+UAiCarAIController* AAiCar::getAIController()
+{
+	return this->controllerAI;
+}
+
 //arthur//
 void AAiCar::OnWallCollision()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Collidiu!"));
-	//implementa ai papito
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Colidiu!"));
+	this->isDead = true;
 }
 
 bool AAiCar::IsCarDead()
 {
-	return false; //implementa ai papiro
+	return this->isDead;
 }
 
 int* AAiCar::GetAllSensorsResult()

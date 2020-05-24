@@ -26,6 +26,8 @@ private:
 	
 	bool isAIControlled = true;
 
+	bool isDead = false;
+
 	//arthur//
 	float LastLogDuration = 0;
 	const int sensorsCount = 5;
@@ -52,4 +54,6 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float Delta) override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UAiCarAIController* getAIController();
 };

@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bForceGameRestart = false;
 
+	float generationTime = 0;
+	const float maxGenerationTime = 10; //In seconds
+
 private:
 	bool CheckIfAllCarsAreDead();
 	void SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot);
@@ -42,4 +45,6 @@ protected:
 public:
 	void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 	//void RestartPlayerAtTransform(AController* NewPlayer, const FTransform& SpawnTransform) override;
+
+	void nextGeneration();
 };
