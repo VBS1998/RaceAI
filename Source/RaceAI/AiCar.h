@@ -49,6 +49,8 @@ public:
 	void OnWallCollision();
 	bool IsCarDead();
 	int* GetAllSensorsResult();
+
+	virtual void Reset() override;
 	//arthur//
 
 	virtual void BeginPlay() override;

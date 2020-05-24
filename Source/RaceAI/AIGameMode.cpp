@@ -97,6 +97,8 @@ void AAIGameMode::nextGeneration()
 	int maxFitness = 0;
 	UNeuralNetwork* bestNetwork = nullptr;
 	int bestCar_num = 0;
+	FHitResult outHit;
+
 	for (int i = 0; i < IntantiatedCars.Num(); i++)
 	{
 		FVector carPosition = IntantiatedCars[i]->GetActorLocation();
@@ -116,12 +118,13 @@ void AAIGameMode::nextGeneration()
 			controller->setNetwork(bestNetwork->mutateNetwork());
 		}
 	}
-
+	UE_LOG(LogTemp, Warning, TEXT("Chamou reset"));
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
 		IntantiatedCars[i]->MoveForward(0);
 		IntantiatedCars[i]->MoveRight(0);
 		IntantiatedCars[i]->OnHandbrakeReleased();
-		IntantiatedCars[i]->Reset();
+		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::ResetPhysics);
+		//IntantiatedCars[i]->Reset();
 	}
 	this->generationTime = 0;
 }
