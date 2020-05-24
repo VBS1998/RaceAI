@@ -114,18 +114,21 @@ void AAIGameMode::nextGeneration()
 	}
 
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
-		IntantiatedCars[i]->MoveForward(0);
-		IntantiatedCars[i]->MoveRight(0);
-		IntantiatedCars[i]->OnHandbrakeReleased();
-		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::TeleportPhysics);
-		IntantiatedCars[i]->ResetVars();
-		IntantiatedCars[i]->GetVehicleMovementComponent()->Velocity = FVector::ZeroVector;
-		
 		if (i != bestCar_num) {
 			UAiCarAIController* controller = IntantiatedCars[i]->getAIController();
 			controller->deleteNetwork();
 			controller->setNetwork(bestNetwork->mutateNetwork());
 		}
+	}
+
+	for (int i = 0; i < IntantiatedCars.Num(); i++) {
+		IntantiatedCars[i]->MoveForward(0);
+		IntantiatedCars[i]->MoveRight(0);
+		IntantiatedCars[i]->OnHandbrakeReleased();
+		IntantiatedCars[i]->ResetVars();
+		IntantiatedCars[i]->GetVehicleMovementComponent()->Velocity = FVector::ZeroVector;
+		IntantiatedCars[i]->GetVehicleMovementComponent()->SetTargetGear(0, true);
+		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::TeleportPhysics);
 	}
 
 	this->generationTime = 0;
