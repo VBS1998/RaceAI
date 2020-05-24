@@ -28,9 +28,7 @@ void AAiCar::Tick(float Delta)
 	if (controllerAI->shouldMoveLeft()) this->MoveRight(-1);
 
 	//arthur//
-	LastLogDuration += Delta;
-
-	SensorRayCasts();
+	if (bLogActive) LastLogDuration += Delta;
 	//arthur//
 }
 
@@ -56,32 +54,58 @@ bool AAiCar::IsCarDead()
 	return false; //implementa ai papiro
 }
 
-void AAiCar::SensorRayCasts()
+int* AAiCar::GetAllSensorsResult()
+{
+	FVector forwardVector = this->GetActorForwardVector();
+	int* sensorsResult = new int[sensorsCount];
+
+	forwardVector = forwardVector.RotateAngleAxis(-(sensorsAngle * (sensorsCount / 2)), FVector::UpVector);
+	
+	if (bLogActive && LastLogDuration >= 3)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("---------------------------------------"));
+	}
+	for (int i = 0; i < sensorsCount; i++)
+	{
+		sensorsResult[i] = (int)SensorRayCast(forwardVector);
+		forwardVector = forwardVector.RotateAngleAxis(sensorsAngle, FVector::UpVector);
+		if (bLogActive && LastLogDuration >= 3)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("RayCastHit carro numero: %s Angulo: %s Distancia: %s"), *this->GetName(), *FString::FromInt(sensorsAngle * i), *FString::FromInt(sensorsResult[i]));
+		}
+	}	
+	if (bLogActive && LastLogDuration >= 3)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("---------------------------------------"));
+		LastLogDuration = 0;
+	}
+
+	return sensorsResult;
+}
+float AAiCar::SensorRayCast(FVector CastDir)
 {
 	FVector start;
-	FVector forwardVector;
 	FVector end;
 	FHitResult outHit;
 	FCollisionQueryParams collisionParams;
 
-
-	forwardVector = this->GetActorForwardVector();
-	forwardVector.Z = 0;
 	start = this->GetActorLocation();
-	start.Z = 50.0f;
-	end = ((forwardVector * 10000.0f) + start);
+	start.Z = 0.f;
+	CastDir.Z = start.Z;
+	end = ((CastDir * 10000.0f) + start);
+
+	collisionParams.AddIgnoredActor(this);
 
 	DrawDebugLine(GetWorld(), start, end, FColor::Green, false, -1, 8, 1);
-	if (GetWorld()->LineTraceSingleByChannel(outHit, start, end, ECC_Destructible, collisionParams))
+	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_WorldStatic, collisionParams))
 	{
-		if (outHit.bBlockingHit)
+		if (Cast<AAiCar>(outHit.Actor) == nullptr)
 		{
-			if (GEngine && (LastLogDuration > 5.f))
-			{
-				//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Red, FString::Printf(TEXT("Acertou o: %s, a distancia: %d"), *outHit.GetActor()->GetName(), ((int)outHit.Distance)));
-				LastLogDuration = 0;
-			}
+			
+			return outHit.Distance;
 		}
 	}
+
+	return -1.f;
 }
 //arhtur//

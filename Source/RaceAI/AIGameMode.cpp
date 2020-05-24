@@ -37,7 +37,7 @@ void AAIGameMode::RestartPlayer(AController* NewPlayer)
 	{
 		return;
 	}
-	
+
 	AActor* StartSpot = FindPlayerStart(NewPlayer);
 
 	// If a start spot wasn't found,

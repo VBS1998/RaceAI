@@ -28,19 +28,25 @@ private:
 
 	//arthur//
 	float LastLogDuration = 0;
+	const int sensorsCount = 5;
+	const int sensorsAngle = 45;
 
-	void SensorRayCasts();
+	float SensorRayCast(FVector _castDir);
 	//arthur//
 protected:
 	//arthur//
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay)
 	FName WallTag;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bLogActive;
 	//arthur//
 public:
 	//arthur//
 	UFUNCTION(BlueprintCallable)
 	void OnWallCollision();
 	bool IsCarDead();
+	int* GetAllSensorsResult();
 	//arthur//
 
 	virtual void BeginPlay() override;
