@@ -50,7 +50,7 @@ public:
 	bool IsCarDead();
 	int* GetAllSensorsResult();
 
-	virtual void Reset() override;
+	void ResetVars();
 	//arthur//
 
 	virtual void BeginPlay() override;

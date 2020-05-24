@@ -58,9 +58,9 @@ UAiCarAIController* AAiCar::getAIController()
 }
 
 //arthur//
-void AAiCar::Reset()
+void AAiCar::ResetVars()
 {
-	Super::Reset();
+	isDead = false;
 }
 void AAiCar::OnWallCollision()
 {
