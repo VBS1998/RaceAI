@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "AiCar.h"
 #include "RaceAIHud.h"
+#include "AiCarController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/GameSession.h"
 #include "GameFramework/CheatManager.h"
@@ -23,6 +24,8 @@ class RACEAI_API AAIGameMode : public AGameMode
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AAiCar*> IntantiatedCars;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	AAiCarController* CarController;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int AiPawnsCount;

@@ -54,29 +54,38 @@ void AAIGameMode::RestartPlayer(AController* NewPlayer)
 	RestartPlayerAtPlayerStart(NewPlayer, StartSpot);
 
 	IntantiatedCars.Add((AAiCar*)NewPlayer->GetPawn());
+	IntantiatedCars[0]->SetFolderPath("/AiCars/Pawns");
 	SpawnAiPawns(IntantiatedCars[0], FindPlayerStart(NewPlayer));
 }
 void AAIGameMode::SpawnAiPawns(AAiCar* AiCar, AActor* StartSpot)
 {
-
-
-	FActorSpawnParameters SpawnInfo;
-	FRotator StartRotation(ForceInit);
-	StartRotation.Yaw = StartSpot->GetActorRotation().Yaw;
-	FVector StartLocation = StartSpot->GetActorLocation();
-	FTransform Transform = FTransform(StartRotation, StartLocation);
+	//UE_LOG(LogTemp, Log, TEXT("SpawnActor failed because the spawned actor %s IsPendingKill"));
+	FActorSpawnParameters spawnInfo;
+	FRotator startRotation(ForceInit);
+	startRotation.Yaw = StartSpot->GetActorRotation().Yaw;
+	FVector startLocation = StartSpot->GetActorLocation();
+	FTransform transform = FTransform(startRotation, startLocation);
 	UWorld* world = GetWorld();
+	FString folderName;
 
-	SpawnInfo.Instigator = GetInstigator();
-	SpawnInfo.ObjectFlags |= RF_Transient;	
+	spawnInfo.Instigator = GetInstigator();
+	spawnInfo.ObjectFlags |= RF_Transient;
+	
+	
 
 	for (int i = 1; i < AiPawnsCount; i++)
 	{
-		AAiCar* InstantiatedAiCar = world->SpawnActor<AAiCar>(AiCar->GetClass(), Transform, SpawnInfo);
+		folderName = "/AiCars/CarNumber_";
+		folderName.AppendInt(i);
+
+		AAiCar* InstantiatedAiCar = world->SpawnActor<AAiCar>(AiCar->GetClass(), transform, spawnInfo);
 		if (!InstantiatedAiCar)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deu ruim na hora de instanciar um ai"));
 		}
+		InstantiatedAiCar->SetFolderPath((FName)folderName);
+		InstantiatedAiCar->SpawnDefaultController();
+		InstantiatedAiCar->GetController()->SetFolderPath((FName)folderName);
 		IntantiatedCars.Add(InstantiatedAiCar);
 	}
 }

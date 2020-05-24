@@ -198,8 +198,9 @@ void ARaceAIPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputCo
 
 void ARaceAIPawn::MoveForward(float Val)
 {
+	//UE_LOG(LogTemp, Warning, TEXT("Call no actor: %s"), *this->GetName());
+
 	GetVehicleMovementComponent()->SetThrottleInput(Val);
-	//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Red, FString::Printf(TEXT("Acertou o: %s, a distancia: %d"), *outHit.GetActor()->GetName(), ((int)outHit.Distance)));
 }
 
 void ARaceAIPawn::MoveRight(float Val)

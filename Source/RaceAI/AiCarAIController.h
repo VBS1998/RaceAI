@@ -19,6 +19,7 @@ private:
 	//Car input variables
 	bool move_forward, move_back, move_right, move_left, handbreak;
 	//The Neural Network that will define the input variables
+	UPROPERTY()
 	UNeuralNetwork *neuralNetwork;
 
 public:

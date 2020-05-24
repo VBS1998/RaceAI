@@ -17,6 +17,8 @@ void AAiCar::Tick(float Delta)
 {
 	Super::Tick(Delta);
 
+	if (!this->isAIControlled) return;
+
 	int gear = GetVehicleMovement()->GetCurrentGear();
 	int speed = GetVehicleMovement()->GetForwardSpeed();
 	controllerAI->updateOutputsWith(speed, gear, nullptr, 0);
@@ -35,10 +37,10 @@ void AAiCar::Tick(float Delta)
 void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	if (this->isAIControlled) {
-		Super::SetupPlayerInputComponent(PlayerInputComponent);
+		Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
 	}
 	else {
-		Super::Super::SetupPlayerInputComponent(PlayerInputComponent);
+		Super::SetupPlayerInputComponent(PlayerInputComponent);
 	}
 }
 

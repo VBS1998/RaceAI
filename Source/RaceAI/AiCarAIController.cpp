@@ -34,6 +34,7 @@ void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, in
 	delete(outputs);
 	delete(inputs);
 
+
 }
 
 bool UAiCarAIController::shouldMoveForward()
