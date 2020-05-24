@@ -118,6 +118,10 @@ void AAIGameMode::nextGeneration()
 	}
 
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
+		IntantiatedCars[i]->MoveForward(0);
+		IntantiatedCars[i]->MoveRight(0);
+		IntantiatedCars[i]->OnHandbrakeReleased();
 		IntantiatedCars[i]->Reset();
 	}
+	this->generationTime = 0;
 }
