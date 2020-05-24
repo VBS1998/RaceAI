@@ -58,6 +58,10 @@ UAiCarAIController* AAiCar::getAIController()
 }
 
 //arthur//
+void AAiCar::Reset()
+{
+	Super::Reset();
+}
 void AAiCar::OnWallCollision()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Colidiu!"));
