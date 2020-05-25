@@ -83,7 +83,7 @@ void UAiCarAIController::deleteNetwork()
 
 int UAiCarAIController::fitness(FVector2D carPosition, FVector2D goalPosition)
 {
-	return FVector2D::Distance(carPosition, goalPosition);
+	return (int)(FVector2D::Distance(carPosition, goalPosition));
 }
 
 
