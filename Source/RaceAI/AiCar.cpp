@@ -26,7 +26,8 @@ void AAiCar::Tick(float Delta)
 
 	int gear = GetVehicleMovement()->GetCurrentGear();
 	int speed = GetVehicleMovement()->GetForwardSpeed();
-	controllerAI->updateOutputsWith(speed, gear, nullptr, 0);
+	int* sensors = GetAllSensorsResult();
+	controllerAI->updateOutputsWith(speed, gear, sensors, 5);
 
 	if (controllerAI->shouldMoveForward()) this->MoveForward(1);
 	if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
@@ -40,6 +41,8 @@ void AAiCar::Tick(float Delta)
 	else this->OnHandbrakeReleased();
 
 	if (bLogActive) LastLogDuration += Delta;
+
+	delete(sensors);
 }
 
 void AAiCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
