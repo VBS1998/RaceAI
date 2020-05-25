@@ -94,6 +94,7 @@ int* AAiCar::GetAllSensorsResult()
 		if (bLogActive && LastLogDuration >= 3)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("RayCastHit carro numero: %s Angulo: %s Distancia: %s"), *this->GetName(), *FString::FromInt(sensorsAngle * i), *FString::FromInt(sensorsResult[i]));
+			//DrawDebugLine(GetWorld(), this->GetActorLocation(), end, FColor::Green, false, -1, 8, 1);
 		}
 	}	
 	if (bLogActive && LastLogDuration >= 3)
@@ -112,19 +113,21 @@ float AAiCar::SensorRayCast(FVector CastDir)
 	FCollisionQueryParams collisionParams;
 
 	start = this->GetActorLocation();
-	start.Z = 0.f;
+	start.Z = 10.f;
+	CastDir.Z = 20.f;
+	CastDir = CastDir * 10000.0f;
 	CastDir.Z = start.Z;
-	end = ((CastDir * 10000.0f) + start);
+	end = (CastDir + start);
 
 	collisionParams.AddIgnoredActor(this);
 
 
 	if (bLogActive) DrawDebugLine(GetWorld(), start, end, FColor::Green, false, -1, 8, 1);
-	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_WorldStatic, collisionParams))
+	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_Destructible, collisionParams))
 	{
 		if (Cast<AAiCar>(outHit.Actor) == nullptr)
-		{			
-			return outHit.Distance;
+		{						
+			return (FVector::Distance(start, outHit.ImpactPoint));
 		}
 	}
 
