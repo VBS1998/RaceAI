@@ -115,12 +115,12 @@ float AAiCar::SensorRayCast(FVector CastDir)
 
 	collisionParams.AddIgnoredActor(this);
 
-	DrawDebugLine(GetWorld(), start, end, FColor::Green, false, -1, 8, 1);
+
+	if (bLogActive) DrawDebugLine(GetWorld(), start, end, FColor::Green, false, -1, 8, 1);
 	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_WorldStatic, collisionParams))
 	{
 		if (Cast<AAiCar>(outHit.Actor) == nullptr)
-		{
-			
+		{			
 			return outHit.Distance;
 		}
 	}
