@@ -37,11 +37,13 @@ private:
 	//arthur//
 protected:
 	//arthur//
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName WallTag;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bLogActive;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bForceVisible;
 	//arthur//
 public:
 	//arthur//
@@ -56,6 +58,6 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float Delta) override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	void ToggleVizible();
 	UAiCarAIController* getAIController();
 };

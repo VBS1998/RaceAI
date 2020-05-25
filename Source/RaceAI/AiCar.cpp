@@ -42,6 +42,12 @@ void AAiCar::Tick(float Delta)
 
 	if (bLogActive) LastLogDuration += Delta;
 
+	if (!GetMesh()->GetVisibleFlag())
+	{
+		if(bForceVisible)
+			GetMesh()->SetVisibility(true);
+	}
+
 	delete(sensors);
 }
 
@@ -64,18 +70,26 @@ UAiCarAIController* AAiCar::getAIController()
 void AAiCar::ResetVars()
 {
 	isDead = false;
+	GetMesh()->BodyInstance.bLockTranslation = false;
+	GetMesh()->BodyInstance.bLockRotation = false;
 }
 void AAiCar::OnWallCollision()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Colidiu!"));
+
+	GetMesh()->BodyInstance.bLockTranslation = true;
+	GetMesh()->BodyInstance.bLockRotation = true;
 	this->isDead = true;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Colidiu!"));
 }
 
 bool AAiCar::IsCarDead()
 {
 	return this->isDead;
 }
-
+void AAiCar::ToggleVizible()
+{
+	
+}
 int* AAiCar::GetAllSensorsResult()
 {
 	FVector forwardVector = this->GetActorForwardVector();

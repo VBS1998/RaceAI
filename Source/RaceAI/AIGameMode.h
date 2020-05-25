@@ -29,6 +29,8 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int AiPawnsCount;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int TopVisibleCarsCount;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bForceGameRestart = false;

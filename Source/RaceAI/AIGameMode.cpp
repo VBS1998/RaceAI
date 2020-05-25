@@ -96,17 +96,20 @@ void AAIGameMode::nextGeneration()
 {
 	int maxFitness = 0;
 	UNeuralNetwork* bestNetwork = nullptr;
+	AAiCar* maxFitnessCar = nullptr;
 	int bestCar_num = 0;
 	FHitResult outHit;
-
 	UE_LOG(LogTemp, Warning, TEXT("Chamou reset"));
 
 	for (int i = 0; i < IntantiatedCars.Num(); i++)
 	{
 		FVector carPosition = IntantiatedCars[i]->GetActorLocation();
 		FVector2D carPosition2D = FVector2D(carPosition.X, carPosition.Y);
-		int thisFitness = UAiCarAIController::fitness(carPosition2D, FVector2D(-12750, 7800));
+		FVector initialPosition = FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation();
+		FVector2D initialPosition2D = FVector2D(initialPosition.X, initialPosition.Y);
+		int thisFitness = UAiCarAIController::fitness(carPosition2D, initialPosition2D);
 		if (thisFitness > maxFitness) {
+			maxFitnessCar = IntantiatedCars[i];
 			bestNetwork = IntantiatedCars[i]->getAIController()->getNetwork();
 			maxFitness = thisFitness;
 			bestCar_num = i;
@@ -122,6 +125,7 @@ void AAIGameMode::nextGeneration()
 	}
 
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
+		IntantiatedCars[i]->GetMesh()->SetVisibility(i < TopVisibleCarsCount ? true : false);
 		IntantiatedCars[i]->MoveForward(0);
 		IntantiatedCars[i]->MoveRight(0);
 		IntantiatedCars[i]->OnHandbrakeReleased();
@@ -131,6 +135,6 @@ void AAIGameMode::nextGeneration()
 		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::TeleportPhysics);
 		IntantiatedCars[i]->GetVehicleMovementComponent()->StopMovementImmediately();
 	}
-
+	maxFitnessCar->GetMesh()->SetVisibility(true);
 	this->generationTime = 0;
 }
