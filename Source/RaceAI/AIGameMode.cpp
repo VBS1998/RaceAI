@@ -105,7 +105,7 @@ void AAIGameMode::nextGeneration()
 	{
 		FVector carPosition = IntantiatedCars[i]->GetActorLocation();
 		FVector2D carPosition2D = FVector2D(carPosition.X, carPosition.Y);
-		int thisFitness = UAiCarAIController::fitness(carPosition2D, FVector2D(0, 0));
+		int thisFitness = UAiCarAIController::fitness(carPosition2D, FVector2D(-12500, 7800));
 		if (thisFitness > maxFitness) {
 			bestNetwork = IntantiatedCars[i]->getAIController()->getNetwork();
 			maxFitness = thisFitness;

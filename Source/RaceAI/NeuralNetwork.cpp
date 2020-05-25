@@ -50,9 +50,9 @@ UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_
 		newNeuronium.input_weights = new int[input_num];
 		newNeuronium.input_num = input_num;
 		for (int j = 0; j < input_num; j++) {
-			newNeuronium.input_weights[j] = FMath::Rand()%2001 - 1000;
+			newNeuronium.input_weights[j] = (FMath::Rand()%2001) - 1000;
 		}
-		newNeuronium.bias = FMath::Rand()%2001 - 1000;
+		newNeuronium.bias = (FMath::Rand()%2001) - 1000;
 
 		network->innerNeuroniumLayer.Add(newNeuronium);
 	}
@@ -65,7 +65,7 @@ UNeuralNetwork* UNeuralNetwork::generateNeuralNetwork(int input_num, int output_
 		newNeuronium.input_weights = new int[input_num];
 		newNeuronium.input_num = input_num;
 		for (int j = 0; j < input_num; j++) {
-			newNeuronium.input_weights[j] = FMath::Rand() % 2001 - 1000;
+			newNeuronium.input_weights[j] = (FMath::Rand() % 2001) - 1000;
 		}
 		newNeuronium.bias = FMath::Rand() % 2001 - 1000;
 
@@ -82,11 +82,19 @@ UNeuralNetwork* UNeuralNetwork::mutateNetwork()
 	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
 
 	for (int i = 0; i < this->inner_num; i++) {
-		network->innerNeuroniumLayer.Add(this->innerNeuroniumLayer[i]);
+		FNeuronium neuronium = this->innerNeuroniumLayer[i];
+		for (int j = 0; j < neuronium.input_num; j++) {
+			neuronium.input_weights[j] += (FMath::Rand() % 201) - 100;
+		}
+		network->innerNeuroniumLayer.Add(neuronium);
 	}
 	network->inner_num = inner_num;
 	for (int i = 0; i < this->output_num; i++) {
-		network->outputNeuroniumLayer.Add(this->outputNeuroniumLayer[i]);
+		FNeuronium neuronium = this->outputNeuroniumLayer[i];
+		for (int j = 0; j < neuronium.input_num; j++) {
+			neuronium.input_weights[j] += (FMath::Rand() % 201) - 100;
+		}
+		network->outputNeuroniumLayer.Add(neuronium);
 	}
 	network->output_num = output_num;
 
