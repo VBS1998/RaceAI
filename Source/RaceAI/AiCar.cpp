@@ -9,8 +9,8 @@ void AAiCar::BeginPlay()
 		controllerAI = NewObject<UAiCarAIController>();
 		controllerAI->BeginPlay();
 	}
+	SkeletalMesh = GetMesh();
 	Super::BeginPlay();
-	
 }
 
 void AAiCar::Tick(float Delta)
@@ -66,27 +66,27 @@ UAiCarAIController* AAiCar::getAIController()
 	return this->controllerAI;
 }
 
+//bool simulatePhysics;
 //arthur//
 void AAiCar::ResetVars()
 {
 	isDead = false;
-	GetMesh()->BodyInstance.bLockTranslation = false;
-	GetMesh()->BodyInstance.bLockRotation = false;
+
+	SkeletalMesh->SetSimulatePhysics(true);
+	//SkeletalMesh->BodyInstance.bLockTranslation = false;
+	//SkeletalMesh->BodyInstance.bLockRotation = false;
 }
 void AAiCar::OnWallCollision()
 {
-	GetMesh()->BodyInstance.bLockTranslation = true;
-	GetMesh()->BodyInstance.bLockRotation = true;
+	SkeletalMesh->SetSimulatePhysics(false);
+	//SkeletalMesh->BodyInstance.bLockTranslation = true;
+	//SkeletalMesh->BodyInstance.bLockRotation = true;
 	this->isDead = true;
 }
 
 bool AAiCar::IsCarDead()
 {
 	return this->isDead;
-}
-void AAiCar::ToggleVizible()
-{
-	
 }
 int* AAiCar::GetAllSensorsResult()
 {

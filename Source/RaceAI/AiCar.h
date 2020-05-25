@@ -39,6 +39,7 @@ protected:
 	//arthur//
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName WallTag;
+	USkeletalMeshComponent* SkeletalMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bLogActive;
@@ -58,6 +59,5 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float Delta) override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	void ToggleVizible();
 	UAiCarAIController* getAIController();
 };

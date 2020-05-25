@@ -136,7 +136,7 @@ void AAIGameMode::nextGeneration()
 		IntantiatedCars[i]->GetVehicleMovementComponent()->Velocity = FVector::ZeroVector;
 		IntantiatedCars[i]->GetVehicleMovementComponent()->SetTargetGear(0, true);
 		IntantiatedCars[i]->SetActorLocationAndRotation(FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorLocation(), FindPlayerStart(IntantiatedCars[i]->GetController())->GetActorRotation(), false, &outHit, ETeleportType::TeleportPhysics);
-		IntantiatedCars[i]->GetVehicleMovementComponent()->StopMovementImmediately();
+		//IntantiatedCars[i]->GetVehicleMovementComponent()->StopMovementImmediately();
 	}
 	maxFitnessCar->GetMesh()->SetVisibility(true);
 	this->generationTime = 0;
