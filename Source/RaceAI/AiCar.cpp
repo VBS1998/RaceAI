@@ -30,15 +30,15 @@ void AAiCar::Tick(float Delta)
 	controllerAI->updateOutputsWith(speed, gear, sensors, 5);
 
 	if (controllerAI->shouldMoveForward()) this->MoveForward(1);
-	if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
-	if (!controllerAI->shouldMoveForward() && !controllerAI->shouldMoveBack()) this->MoveForward(0);
+	//if (controllerAI->shouldMoveBack()) this->MoveForward(-1);
+	if (!controllerAI->shouldMoveForward() /*&& !controllerAI->shouldMoveBack()*/) this->MoveForward(0);
 
 	if (controllerAI->shouldMoveRight()) this->MoveRight(1);
 	if (controllerAI->shouldMoveLeft()) this->MoveRight(-1);
 	if (!controllerAI->shouldMoveRight() && !controllerAI->shouldMoveLeft()) this->MoveRight(0);
 
-	if (controllerAI->shouldBreak()) this->OnHandbrakePressed();
-	else this->OnHandbrakeReleased();
+	//if (controllerAI->shouldBreak()) this->OnHandbrakePressed();
+	//else this->OnHandbrakeReleased();
 
 	if (bLogActive) LastLogDuration += Delta;
 
@@ -75,11 +75,9 @@ void AAiCar::ResetVars()
 }
 void AAiCar::OnWallCollision()
 {
-
 	GetMesh()->BodyInstance.bLockTranslation = true;
 	GetMesh()->BodyInstance.bLockRotation = true;
 	this->isDead = true;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Colidiu!"));
 }
 
 bool AAiCar::IsCarDead()

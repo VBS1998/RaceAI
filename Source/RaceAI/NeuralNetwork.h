@@ -34,4 +34,6 @@ public:
 
 	static UNeuralNetwork* generateNeuralNetwork(int input_num, int output_num);
 	UNeuralNetwork* mutateNetwork();
+
+	void destroyNeuroniums();
 };

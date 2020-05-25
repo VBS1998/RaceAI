@@ -78,6 +78,7 @@ void UAiCarAIController::setNetwork(UNeuralNetwork* network)
 
 void UAiCarAIController::deleteNetwork()
 {
+	//neuralNetwork->destroyNeuroniums();
 	neuralNetwork->ConditionalBeginDestroy();
 }
 
