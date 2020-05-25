@@ -89,13 +89,16 @@ int* AAiCar::GetAllSensorsResult()
 	}
 	for (int i = 0; i < sensorsCount; i++)
 	{
-		sensorsResult[i] = (int)SensorRayCast(forwardVector);
-		forwardVector = forwardVector.RotateAngleAxis(sensorsAngle, FVector::UpVector);
 		if (bLogActive && LastLogDuration >= 3)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("RayCastHit carro numero: %s Angulo: %s Distancia: %s"), *this->GetName(), *FString::FromInt(sensorsAngle * i), *FString::FromInt(sensorsResult[i]));
-			//DrawDebugLine(GetWorld(), this->GetActorLocation(), end, FColor::Green, false, -1, 8, 1);
+			UE_LOG(LogTemp, Warning, TEXT("RayCastHit carro numero: %s FOward Vec: %s Distancia: %s"), *this->GetName(), *forwardVector.ToString(), *FString::FromInt(sensorsResult[i]));
 		}
+		sensorsResult[i] = (int)SensorRayCast(forwardVector);		
+		if (bLogActive) DrawDebugLine(GetWorld(), this->GetActorLocation(), (forwardVector * sensorsResult[i]) + this->GetActorLocation(), FColor::Red, false, -1, 8, 1);
+
+		forwardVector = forwardVector.RotateAngleAxis(sensorsAngle, FVector::UpVector);
+
+		
 	}	
 	if (bLogActive && LastLogDuration >= 3)
 	{
@@ -122,11 +125,11 @@ float AAiCar::SensorRayCast(FVector CastDir)
 	collisionParams.AddIgnoredActor(this);
 
 
-	if (bLogActive) DrawDebugLine(GetWorld(), start, end, FColor::Green, false, -1, 8, 1);
-	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_Destructible, collisionParams))
+	if (GetWorld()->LineTraceSingleByObjectType(outHit, start, end, ECC_WorldStatic, collisionParams))
 	{
 		if (Cast<AAiCar>(outHit.Actor) == nullptr)
 		{						
+			if (bLogActive) DrawDebugLine(GetWorld(), start, outHit.ImpactPoint, FColor::Blue, false, -1, 8, 1);
 			return (FVector::Distance(start, outHit.ImpactPoint));
 		}
 	}
