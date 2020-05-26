@@ -11,7 +11,7 @@ void UAiCarAIController::BeginPlay()
 	this->move_left = false;
 	this->handbreak = false;
 
-	this->neuralNetwork = UNeuralNetwork::generateNeuralNetwork(2, 5);
+	this->neuralNetwork = UNeuralNetwork::generateNeuralNetwork(7, 5);
 }
 
 void UAiCarAIController::updateOutputsWith(int speed, int gear, int* sensors, int sensors_num)
