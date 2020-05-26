@@ -82,12 +82,12 @@ UNeuralNetwork* UNeuralNetwork::mutateNetwork()
 	UNeuralNetwork* network = NewObject<UNeuralNetwork>();
 
 	for (int i = 0; i < this->inner_num; i++) {
-		UE_LOG(LogTemp, Warning, TEXT("before %d"), this->innerNeuroniumLayer[i].input_weights[0]);
+		//UE_LOG(LogTemp, Warning, TEXT("before %d"), this->innerNeuroniumLayer[i].input_weights[0]);
 		FNeuronium neuronium = this->innerNeuroniumLayer[i];
 		neuronium.input_weights = new int[neuronium.input_num];
 		for (int j = 0; j < neuronium.input_num; j++) {
 			neuronium.input_weights[j] = this->innerNeuroniumLayer[i].input_weights[j];
-			if(FMath::Rand()%100 > 10)
+			if(FMath::Rand()%100 > 5)
 			neuronium.input_weights[FMath::Rand() % neuronium.input_num] = (FMath::Rand() % 2001) - 1000;
 		}
 		neuronium.bias += (FMath::Rand() % 401) - 200;
@@ -101,7 +101,7 @@ UNeuralNetwork* UNeuralNetwork::mutateNetwork()
 		neuronium.input_weights = new int[neuronium.input_num];
 		for (int j = 0; j < neuronium.input_num; j++) {
 			neuronium.input_weights[j] = this->outputNeuroniumLayer[i].input_weights[j];
-			if (FMath::Rand() % 100 > 10)
+			if (FMath::Rand() % 100 > 5)
 			neuronium.input_weights[FMath::Rand() % neuronium.input_num] = (FMath::Rand() % 2001) - 1000;
 		}
 		neuronium.bias += (FMath::Rand() % 201) - 100;
@@ -124,4 +124,76 @@ void UNeuralNetwork::destroyNeuroniums()
 		if (outputNeuroniumLayer[i].inputs != nullptr)
 			delete(outputNeuroniumLayer[i].inputs);
 	}
+}
+
+void UNeuralNetwork::loadFromString(FString string)
+{
+	TArray<FString> array;
+	FString space = " ";
+	int string_num = string.ParseIntoArray(array, *space, true);
+
+	int iterator = 0;
+
+	this->inner_num = FCString::Atoi(*array[iterator++]);
+
+	for (int i = 0; i < inner_num; i++) {
+		FNeuronium neuronium;
+		neuronium.input_num = FCString::Atoi(*array[iterator++]);
+		neuronium.input_weights = new int[neuronium.input_num];
+		for (int j = 0; j < neuronium.input_num; j++) {
+			neuronium.input_weights[j] = FCString::Atoi(*array[iterator++]);
+		}
+		neuronium.bias = FCString::Atoi(*array[iterator++]);
+		innerNeuroniumLayer.Add(neuronium);
+	}
+
+	this->output_num = FCString::Atoi(*array[iterator++]);
+
+	for(int i = 0; i < output_num; i++){
+		FNeuronium neuronium;
+		neuronium.input_num = FCString::Atoi(*array[iterator++]);
+		neuronium.input_weights = new int[neuronium.input_num];
+		for (int j = 0; j < neuronium.input_num; j++) {
+			neuronium.input_weights[j] = FCString::Atoi(*array[iterator++]);
+		}
+		neuronium.bias = FCString::Atoi(*array[iterator++]);
+		outputNeuroniumLayer.Add(neuronium);
+	}
+}
+
+FString UNeuralNetwork::toString()
+{
+	FString string = "";
+
+	string.Append(FString::FromInt(inner_num));
+	
+	string.AppendChar(' ');
+
+	for (int i = 0; i < inner_num; i++) {
+		string.Append(FString::FromInt(innerNeuroniumLayer[i].input_num));
+		string.AppendChar(' ');
+		for (int j = 0; j < innerNeuroniumLayer[i].input_num; j++) {
+			string.Append(FString::FromInt(innerNeuroniumLayer[i].input_weights[j]));
+			string.AppendChar(' ');
+		}
+		string.Append(FString::FromInt(innerNeuroniumLayer[i].bias));
+		string.AppendChar(' ');
+	}
+
+	string.Append(FString::FromInt(output_num));
+
+	string.AppendChar(' ');
+
+	for (int i = 0; i < output_num; i++) {
+		string.Append(FString::FromInt(outputNeuroniumLayer[i].input_num));
+		string.AppendChar(' ');
+		for (int j = 0; j < outputNeuroniumLayer[i].input_num; j++) {
+			string.Append(FString::FromInt(outputNeuroniumLayer[i].input_weights[j]));
+			string.AppendChar(' ');
+		}
+		string.Append(FString::FromInt(outputNeuroniumLayer[i].bias));
+		string.AppendChar(' ');
+	}
+
+	return string;
 }

@@ -119,6 +119,17 @@ void AAIGameMode::nextGeneration()
 		}
 	}
 
+	FString filename = "D:/Networks/bestNetwork ";
+	filename.Append(FString::FromInt(maxFitness));
+	filename.Append(".json");
+	if(!FFileHelper::SaveStringToFile(bestNetwork->toString(), *filename)) 
+		UE_LOG(LogTemp, Warning, TEXT("nao salvou"));
+
+	// UNeuralNetwork *networkTeste = NewObject<UNeuralNetwork>();
+	// FString stringTeste;
+	// FFileHelper::LoadFileToString(stringTeste, *filename);
+	// networkTeste->loadFromString(stringTeste);
+
 	for (int i = 0; i < IntantiatedCars.Num(); i++) {
 		if (i != bestCar_num) {
 			UAiCarAIController* controller = IntantiatedCars[i]->getAIController();

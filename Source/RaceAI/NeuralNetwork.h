@@ -36,4 +36,7 @@ public:
 	UNeuralNetwork* mutateNetwork();
 
 	void destroyNeuroniums();
+
+	void loadFromString(FString string);
+	FString toString();
 };
